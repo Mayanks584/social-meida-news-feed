@@ -1,5 +1,4 @@
-// ---------- Temporary in-memory "database" ----------
-// (Replace with MongoDB / MySQL later. Data resets when the server restarts.)
+
 const articles = [
   {
     id: 1,

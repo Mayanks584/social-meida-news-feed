@@ -1,18 +1,16 @@
-// ---------- Frontend logic: calls the backend APIs using fetch ----------
+
 const feed        = document.getElementById('feed');
 const articleForm = document.getElementById('articleForm');
 const loadMoreBtn = document.getElementById('loadMore');
 
-let currentPage = 1; // which page of the feed we are on
-
-// Safety: stops users from injecting HTML/scripts (XSS protection)
+let currentPage = 1; 
 function escapeHtml(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
 }
 
-// Category badge colors
+
 const categoryColors = {
   Technology: '#0ea5e9',
   Sports: '#22c55e',
@@ -22,7 +20,7 @@ const categoryColors = {
   General: '#6b7280'
 };
 
-// Build the HTML for one news article
+
 function renderArticle(a) {
   const badgeColor = categoryColors[a.category] || categoryColors.General;
 
@@ -56,7 +54,7 @@ function renderArticle(a) {
   `;
 }
 
-// 1) GET: load a page of articles
+
 async function loadFeed(page = 1) {
   const res = await fetch(`/api/articles?page=${page}`);
   const data = await res.json();
@@ -64,16 +62,16 @@ async function loadFeed(page = 1) {
   const html = data.articles.map(renderArticle).join('');
 
   if (page === 1) {
-    feed.innerHTML = html;        // fresh load
+    feed.innerHTML = html;       
   } else {
-    feed.innerHTML += html;       // "Load more" adds to the bottom
+    feed.innerHTML += html;       
   }
 
   currentPage = page;
   loadMoreBtn.style.display = data.hasMore ? 'block' : 'none';
 }
 
-// 2) POST: publish a new article
+
 articleForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -93,21 +91,21 @@ articleForm.addEventListener('submit', async (e) => {
   if (res.ok) {
     document.getElementById('title').value = '';
     document.getElementById('content').value = '';
-    loadFeed(1);                  // reload feed so the new article appears on top
+    loadFeed(1);                 
   } else {
     const data = await res.json();
     alert(data.error);
   }
 });
 
-// 3) POST: like an article, then update only that article on screen
+
 async function likeArticle(id) {
   const res = await fetch(`/api/articles/${id}/like`, { method: 'POST' });
   const article = await res.json();
   document.getElementById(`article-${id}`).outerHTML = renderArticle(article);
 }
 
-// 4) POST: add a comment to an article
+
 async function addComment(id) {
   const body = {
     author: document.getElementById(`cname-${id}`).value,
@@ -128,8 +126,7 @@ async function addComment(id) {
   }
 }
 
-// "Load more" button -> next page
+
 loadMoreBtn.addEventListener('click', () => loadFeed(currentPage + 1));
 
-// Load the feed when the page opens
 loadFeed(1);

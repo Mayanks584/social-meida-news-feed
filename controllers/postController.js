@@ -1,13 +1,11 @@
-// ---------- Logic for each article route ----------
+
 const articles = require('../data/posts');
 
-const PAGE_SIZE = 5; // articles per page
+const PAGE_SIZE = 10; 
 
-// GET /api/articles?page=1  -> feed, newest first, with pagination
 exports.getFeed = (req, res) => {
   const page = Math.max(1, Number(req.query.page) || 1);
 
-  // Sort newest first (copy the array so the original order is not changed)
   const sorted = [...articles].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   );
@@ -23,7 +21,7 @@ exports.getFeed = (req, res) => {
   });
 };
 
-// POST /api/articles  -> publish a new article
+
 exports.createArticle = (req, res) => {
   const { title, content, category, author } = req.body;
 
@@ -61,7 +59,7 @@ exports.createArticle = (req, res) => {
   res.status(201).json(newArticle);
 };
 
-// POST /api/articles/:id/like  -> like an article
+
 exports.likeArticle = (req, res) => {
   const article = articles.find(a => a.id === Number(req.params.id));
   if (!article) return res.status(404).json({ error: 'Article not found' });
@@ -70,7 +68,6 @@ exports.likeArticle = (req, res) => {
   res.json(article);
 };
 
-// POST /api/articles/:id/comments  -> add a comment to an article
 exports.addComment = (req, res) => {
   const article = articles.find(a => a.id === Number(req.params.id));
   if (!article) return res.status(404).json({ error: 'Article not found' });
