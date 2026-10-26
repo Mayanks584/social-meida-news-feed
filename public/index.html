@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News Feed</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header>
+    <h1>📰 News Feed</h1>
+    <p>Latest news and updates</p>
+  </header>
+
+  <main>
+    <!-- Publish article form -->
+    <section class="card publish-card">
+      <h2>📝 Publish an Article</h2>
+      <form id="articleForm">
+        <input type="text" id="title" placeholder="Article headline" maxlength="120" required />
+        <select id="category">
+          <option value="Technology">🖥️ Technology</option>
+          <option value="Sports">🏏 Sports</option>
+          <option value="Education">📚 Education</option>
+          <option value="Entertainment">🎬 Entertainment</option>
+          <option value="Business">💼 Business</option>
+          <option value="General">📋 General</option>
+        </select>
+        <input type="text" id="author" placeholder="Author name" required />
+        <textarea id="content" placeholder="Write your article content..." maxlength="1000" required></textarea>
+        <button type="submit">📰 Publish Article</button>
+      </form>
+    </section>
+
+    <!-- Feed -->
+    <section id="feed"></section>
+    <button id="loadMore" class="secondary" style="display:none;">Load more articles</button>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
