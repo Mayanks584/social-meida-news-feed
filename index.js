@@ -1,3 +1,7 @@
+import dotenv from "dotenv";
+dotenv.config({
+    path: './.env'
+});
 import express from "express"
 import connectDb from "./src/database/database.js";
 
@@ -23,7 +27,7 @@ connectDb()
 
 })
 .catch((error)=>{
-    console.log("daild")
+    console.log("MongoDB connection daild:", error)
 
 })
 
