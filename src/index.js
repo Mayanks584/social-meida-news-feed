@@ -2,9 +2,9 @@ import dotenv from "dotenv";
 dotenv.config({
     path: './.env'
 });
-import express from "express"
-import connectDb from "./src/database/database.js";
-import { Users } from "./src/model/user.model.js";
+import {app} from "./app.js"
+import connectDb from "./database/database.js";
+import { Users } from "./model/user.model.js";
 
 const app = express();
 

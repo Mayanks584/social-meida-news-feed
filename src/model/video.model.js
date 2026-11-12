@@ -5,7 +5,18 @@ const videoSchema = new mongoose.Schema({
         type:String,
         required:true,
         default:"0"
-    }
+    },
+    length:[{
+        type:Number,
+        required:true
+    }],
+    discription:{
+        type:String
+    },
+    Views:{
+        type:Number
+    },
+    
 },{
     timestamps:true
 })
