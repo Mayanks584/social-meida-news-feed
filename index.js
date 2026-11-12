@@ -4,7 +4,7 @@ dotenv.config({
 });
 import express from "express"
 import connectDb from "./src/database/database.js";
-import {User } from "./model/user.model.js"
+import { Users } from "./src/model/user.model.js";
 
 const app = express();
 

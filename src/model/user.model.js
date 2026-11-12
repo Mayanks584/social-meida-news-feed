@@ -60,6 +60,9 @@ const User =  new mongoose.Schema(
             type:mongoose.Schema.Types.ObjectId,
             ref:"Following"
         }],
+        refreshToken:{
+            type:String
+        }
     },{
         timestamps:true
     }

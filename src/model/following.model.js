@@ -7,16 +7,9 @@ const userfollowing = new mongoose.Schema(
         required:true,
         default:"0"
 
-        },
-        follows:{
-             id:Number,
-            required:true,
-                default:"0"
         }
-    
-
-
-
 
     }
 )
+
+export const following = mongoose.model("Following",userfollowing)
