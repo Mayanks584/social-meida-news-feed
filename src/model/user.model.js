@@ -1,71 +1,54 @@
-import mongoose  from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const User =  new mongoose.Schema(
-    {
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      trim: true,
+      lowercase: true,
+    },
+    passwordHash: {
+      type: String,
+      required: [true, "Password is required"],
+    },
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    avatarUrl: {
+      type: String,
+      default: "",
+    },
+    bio: {
+      type: String,
+      default: "",
+      trim: true,
+    },
+    roles: {
+      type: [String],
+      enum: ["user", "moderator", "admin"],
+      default: ["user"],
+    },
+    refreshToken: {
+      type: String,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-        username:{
-            type:String,
-            required:true,
-            trim:true,
-            unique:true
-        },
-        password:{
-            type:String,
-            required:[true,"password is required"]
-        },
-        email:{
-            type:String,
-            required:true,
-            unique:true,
-            trim:true,
-            lowercase:true
-        },
+userSchema.index({ username: "text", name: "text" });
 
-        profile:{
-            type:String
-        },
-        name:{
-            type:String,
-            required:true
-        },
-        bio:{
-            type:String
-        },
-        post:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Post"
-        }],
-        video:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Video"
-        }],
-        search:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Search"
-
-        }],
-        like:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Like"
-        }],
-        comment:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Comment"
-        }],
-        follow:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Follow"
-        }],
-        following:[{
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"Following"
-        }],
-        refreshToken:{
-            type:String
-        }
-    },{
-        timestamps:true
-    }
-)
-
-export const Users = mongoose.model("Users",User)
+export const User = mongoose.model("User", userSchema);
+export { User as Users };
