@@ -4,7 +4,7 @@ dotenv.config({
 });
 import express from "express"
 import connectDb from "./src/database/database.js";
-
+import {User } from "./model/user.model.js"
 
 const app = express();
 
@@ -30,4 +30,6 @@ connectDb()
     console.log("MongoDB connection daild:", error)
 
 })
+
+
 
