@@ -6,7 +6,7 @@ import {app} from "./app.js"
 import connectDb from "./database/database.js";
 import { Users } from "./model/user.model.js";
 
-const app = express();
+// const app = express();
 
 
 

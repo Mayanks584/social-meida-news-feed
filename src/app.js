@@ -15,10 +15,14 @@ app.use(cors({
 
 app.use(express.json());
 
-app.use(express.static("public"))
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
+app.use(cookieParser());
 
+import UserRoute from "./routes/user.route.js";
 
+app.use("/api/v1/users", UserRoute);
 
 
 
